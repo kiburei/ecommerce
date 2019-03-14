@@ -12,11 +12,22 @@
     <nav>
     <div class="container">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
+        <a href="#" class="brand-logo">
+          <% if shop_signed_in? %>
+            <%= current_shop.shop_name %>
+          <% else %>
+            <span>VetaShop</span>
+          <% end %>
+        </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="sass.html">Sass</a></li>
           <li><a href="badges.html">Components</a></li>
           <li><a href="collapsible.html">JavaScript</a></li>
+          <% if shop_signed_in? %>
+            <li><%= link_to 'Edit Shop', edit_shop_registration_path %></li>
+          <% else %>
+            <li><%= link_to 'New Shop', new_shop_registration_path %></li>
+          <% end %>
         </ul>
       </div>
     </div>
