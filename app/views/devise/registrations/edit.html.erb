@@ -1,43 +1,123 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row">
+  <div class="col s8">
+    <div class="card shop-info">
+      <h5>Manage <%= resource_name.to_s.humanize %></h5>
+      <%= link_to 'log Out', destroy_shop_session_path, method: 'delete' %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+          <% if @minimum_password_length %>
+            <br />
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "current-password" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Update", class: 'btn' %>
+        </div>
+      <% end %>
+
+      <h3>Cancel my account</h3>
+
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn red' %></p>
+
+      <%= link_to "Back", :back %>
+
+    </div>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+  <div class="col s4">
+    <div class="card">
+      <h5>Contact Information</h5>
+      <%= render './addresses/form', address: current_shop.addresses.last %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s4">
+    <div class="card">
+      <button class="btn btn-add" onclick="newCategory()">+</button>
+      <h5>Shop Categories</h5>
+      <div id="category-form" style="display: none;">
+        <%= form_tag categories_path do %>
+          <%= text_field_tag :category_name, nil, :placeholder => 'Category Name' %>
+          <%= submit_tag 'Add', class: 'btn' %>
+        <% end %>
+      </div>
+      <table class="stripped">
+        <tbody>
+          <% current_shop.categories.each do |cat| %>
+            <tr>
+              <td><%= cat.category_name %></td>
+              <td><%= link_to 'Edit', root_url, class: 'btn yellow lighten-3' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="col s8">
+    <div class="card">
+      <button class="btn btn-add" onclick="newProduct()">+</button>
+      <div id="product-form" style="display: none;">
+        <%= form_tag products_path do %>
+          <%= select_tag "category_id", options_from_collection_for_select(current_shop.categories, 'id', 'category_name', '1'), class: 'browser-default' %>
+          <%= text_field_tag :product_name, nil, :placeholder => 'Product Name' %>
+          <%= text_field_tag :product_description, nil, :placeholder => 'Product Description' %>
+          <div class="row">
+            <div class="col s6">
+              <%= number_field_tag :price, nil, :placeholder => 'Product Price' %>
+            </div>
+            <div class="col s6">
+              <%= number_field_tag :quantity, nil, :placeholder => 'Product Quantity' %>
+            </div>
+          </div>
+          <%= submit_tag 'Add Product', class: 'btn' %>
+        <% end %>
+      </div>
+      <h5>Products</h5>
+      <table class="stripped">
+        <thead>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <% current_shop.products.each do |prod| %>
+            <tr>
+              <td><%= prod.product_name %></td>
+              <td><%= prod.product_description %></td>
+              <td><%= number_to_currency(prod.price, :unit => 'KES') %></td>
+              <td><%= prod.quantity %></td>
+              <td><%= link_to 'Edit', root_url, class: 'btn yellow lighten-3' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

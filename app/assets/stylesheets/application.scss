@@ -17,3 +17,49 @@
  $primary-color: color("pink", "lighten-3") !default;
  $secondary-color: color("pink", "base") !default;
  @import 'materialize';
+
+
+.shop-banner-landing {
+  padding: 50px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('store');
+  background-size: cover;
+}
+
+.title-banner {
+  color: white;
+  font-weight: lighter;
+}
+
+.content-banner {
+  color: white;
+  text-align: right;
+}
+
+.text-banner{
+  line-height: 20px;
+}
+
+.money-banner {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.side-nav-categories {
+  font-style: 30px;
+  line-height: 50px;
+}
+
+.category-link {
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+  padding: 5px;
+}
+
+.card {
+  padding: 50px;
+}
+
+.btn-add {
+  float: right;
+}

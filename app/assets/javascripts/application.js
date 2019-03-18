@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require_tree .
 //= require materialize
+
+function newCategory() {
+  document.getElementById('category-form').style.display = 'block';
+}
+
+function newProduct() {
+  document.getElementById('product-form').style.display = 'block';
+}

@@ -12,19 +12,17 @@
     <nav>
     <div class="container">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">
           <% if shop_signed_in? %>
-            <%= current_shop.shop_name %>
+            <%= link_to current_shop.shop_name, root_url, class: 'brand-logo' %>
           <% else %>
-            <span>VetaShop</span>
+            <a href="/" class="brand-logo">VetaShop</a>
           <% end %>
-        </a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" class="right nav-links">
           <li><a href="sass.html">Sass</a></li>
           <li><a href="badges.html">Components</a></li>
           <li><a href="collapsible.html">JavaScript</a></li>
           <% if shop_signed_in? %>
-            <li><%= link_to 'Edit Shop', edit_shop_registration_path %></li>
+            <li><%= link_to 'Manage Shop', edit_shop_registration_path %></li>
           <% else %>
             <li><%= link_to 'New Shop', new_shop_registration_path %></li>
           <% end %>
@@ -42,23 +40,23 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Footer Content</h5>
-          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+          <h5 class="white-text"><%= current_shop.shop_name %></h5>
+          <p class="grey-text text-lighten-4"><%= current_shop.tag_line %></p>
         </div>
         <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Links</h5>
+          <h5 class="white-text">Contact Information</h5>
           <ul>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            <% current_shop.addresses.each do |addr| %>
+              <li><%= addr.physical_address %></li>
+              <li><%= addr.phone_number %></li>
+            <% end %>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      © 2014 Copyright Text
+      © 2014 Copyright <%= current_shop.shop_name %>
       <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
       </div>
     </div>
