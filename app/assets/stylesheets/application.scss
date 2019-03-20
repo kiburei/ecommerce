@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require bxslider
  */
  @import "materialize/components/color-variables";
  $primary-color: color("pink", "lighten-3") !default;
@@ -61,5 +62,23 @@
 }
 
 .btn-add {
+  float: right;
+}
+
+.bx-wrapper {
+  border: 0px;
+}
+
+.products-container {
+  padding: 10px;
+  border: solid 1px #e1e1e1;
+  margin-bottom: 20px;
+}
+
+.product-card {
+  height: 300px;
+}
+
+.money-tile {
   float: right;
 }
