@@ -1,7 +1,12 @@
 <div class="product-page">
   <div class="row product-area">
     <div class="col s6">
-      <%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card' %>
+      <ul class="bxslider" style="border: 0px;">
+        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
+        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
+        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
+        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
+      </ul>
     </div>
     <div class="col s6">
       <h4><%= @product.product_name %></h4>
@@ -9,10 +14,22 @@
       <p><%= number_to_currency(@product.price, :unit => ' KES') %></p>
       <div class="qty-form">
         <%= form_tag root_url do %>
+          <label for="">Size</label>
+          <%= select_tag :size, options_for_select(['XXL', 'XL', 'Large', 'Medium', 'Small']), class: 'browser-default' %>
+          <label for="">Color</label>
+          <div class="row">
+            <% red = ['red', 'blue', 'purple', 'orange'] %>
+            <% 4.times do |x| %>
+              <div class="col s2">
+                <div class="card color <%= red[x] %>"></div>
+              </div>
+            <% end %>
+          </div>
+          <label for="">Quantity</label>
           <%= number_field_tag :quantity, nil, :value => 1 %>
+          <%= submit_tag 'Add To Cart', class: 'btn-large' %>
         <% end %>
       </div>
-      <%= link_to 'Add To Cart', root_url, class: 'btn-large' %>
     </div>
   </div>
   <div class="row">
