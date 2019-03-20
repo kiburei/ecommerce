@@ -19,6 +19,9 @@
  $secondary-color: color("pink", "base") !default;
  @import 'materialize';
 
+body {
+  // background-color: grey;
+}
 
 .shop-banner-landing {
   padding: 50px;
@@ -51,10 +54,9 @@
 }
 
 .category-link {
-  border-style: solid;
-  border-width: 1px;
   text-align: center;
-  padding: 5px;
+  padding: 10px;
+  border-bottom: solid 1px #e1e1e1;
 }
 
 .card {

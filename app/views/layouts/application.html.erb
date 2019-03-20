@@ -18,9 +18,6 @@
             <a href="/" class="brand-logo">VetaShop</a>
           <% end %>
         <ul id="nav-mobile" class="right nav-links">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">JavaScript</a></li>
           <% if shop_signed_in? %>
             <li><%= link_to 'Manage Shop', edit_shop_registration_path %></li>
           <% else %>
@@ -31,7 +28,7 @@
     </div>
   </nav>
   </header>
-  <body>
+  <body onload="slider()">
     <div class="container">
       <%= yield %>
     </div>
@@ -61,5 +58,9 @@
       </div>
     </div>
   </footer>
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.bxslider').bxSlider();
+  });
+</script>
 </html>

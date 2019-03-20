@@ -4,20 +4,20 @@
 
 <div class="products-container">
   <div class="row">
-    <% 10.times do %>
-      <a href="/products/<%= Product.all.sample.id %>">
+    <% @products.each do |product| %>
+      <a href="/products/<%= product.id %>">
         <div class="col s3 ">
           <div class="card" style="padding: 0px;">
             <div class="card-image">
               <%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card' %>
             </div>
             <div class="card-content">
-              <h6><%= Product.all.sample.product_name %></h6>
-              <p><%= Product.all.sample.product_description[0, 30] + "..." %> <%= link_to 'more' %></p>
+              <h6><%= product.product_name %></h6>
+              <p><%= product.product_description[0, 30] + "..." %> <%= link_to 'more' %></p>
             </div>
             <div class="card-action">
               <a href="#">Add to Cart</a>
-              <span class="money-tile"><%= number_to_currency(Product.all.sample.price, :unit => ' KES') %></span>
+              <span class="money-tile"><%= number_to_currency(product.price, :unit => ' KES') %></span>
             </div>
           </div>
         </div>

@@ -18,9 +18,7 @@
 //= require materialize
 //= require bxslider
 
-$(document).ready(function(){
-  $('.bxslider').bxSlider();
-});
+
 
 function newCategory() {
   document.getElementById('category-form').style.display = 'block';
