@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_094506) do
+ActiveRecord::Schema.define(version: 2019_03_21_131904) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "country"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 2019_03_20_094506) do
     t.index ["shop_id"], name: "index_categories_on_shop_id"
   end
 
+  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "product_id"
+    t.bigint "shopping_cart_id"
+    t.string "size"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["shopping_cart_id"], name: "index_order_items_on_shopping_cart_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "product_name"
     t.string "product_description"
@@ -43,6 +54,14 @@ ActiveRecord::Schema.define(version: 2019_03_20_094506) do
     t.integer "rating"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["shop_id"], name: "index_products_on_shop_id"
+  end
+
+  create_table "shopping_carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.decimal "sub_total_price", precision: 10
+    t.decimal "total_price", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "session_id"
   end
 
   create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,6 +81,8 @@ ActiveRecord::Schema.define(version: 2019_03_20_094506) do
 
   add_foreign_key "addresses", "shops"
   add_foreign_key "categories", "shops"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "order_items", "shopping_carts"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "shops"
 end

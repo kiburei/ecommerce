@@ -29,6 +29,45 @@
     </div>
   </nav>
   </header>
+  <div class="shopping-cart">
+    <div class="cart-title">
+      <h6>Cart <sub><%= @cart.order_items.count %> Items</sub> </h6>
+        <table>
+          <thead>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </thead>
+          <tbody>
+            <% @cart.order_items.each do |item| %>
+              <tr>
+                <td class="td-cart">
+                  <%= item.product.product_name %></br>
+                  <%= number_to_currency(item.product.price, :unit => ' KES') %>
+                </td>
+                <td class="td-cart"><%= item.quantity %></td>
+                <td class="td-cart"><%= number_to_currency((item.quantity * item.product.price), :unit => ' KES') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <table>
+          <tr>
+            <td>Subtotal</td>
+            <td><%= number_to_currency(rand(25000..30000), :unit => ' KES') %></td>
+          </tr>
+          <tr>
+            <td>VAT 16%</td>
+            <td><%= number_to_currency(rand(25000..30000), :unit => ' KES') %></td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td><%= number_to_currency(rand(25000..30000), :unit => ' KES') %></td>
+          </tr>
+        </table>
+        <%= link_to 'Checkout', root_url, class: 'btn-large' %>
+    </div>
+  </div>
   <body onload="slider()">
     <div class="container">
       <%= yield %>

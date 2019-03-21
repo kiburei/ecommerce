@@ -1,5 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :current_cart
+
+  def current_cart
+    if ShoppingCart.where(session_id: session.id).any?
+      @cart = ShoppingCart.find_by_session_id(session.id)
+    else
+      @cart = ShoppingCart.create!(session_id: session.id)
+    end
+  end
 
   protected
 

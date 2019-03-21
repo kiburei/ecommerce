@@ -13,8 +13,9 @@
       <p><%= @product.product_description %></p>
       <p><%= number_to_currency(@product.price, :unit => ' KES') %></p>
       <div class="qty-form">
-        <%= form_tag root_url do %>
+        <%= form_tag order_items_path  do %>
           <label for="">Size</label>
+          <%= hidden_field_tag :product_id, nil, :value => @product.id %>
           <%= select_tag :size, options_for_select(['XXL', 'XL', 'Large', 'Medium', 'Small']), class: 'browser-default' %>
           <label for="">Color</label>
           <div class="row">
