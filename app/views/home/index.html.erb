@@ -2,7 +2,7 @@
   <div class="col s2 side-nav-categories">
     <div class=side-nav-categories"">
           <ul>
-            <% current_shop.categories.each do |cat| %>
+            <% @shop.categories.each do |cat| %>
               <a href="/categories/<%= cat.id %>">
                 <li class="category-link"><%= cat.category_name %></li>
               </a>
@@ -12,7 +12,7 @@
   </div>
   <div class="col s10">
     <ul class="bxslider" style="border: 0px;">
-    <% current_shop.categories.each do |cat| %>
+    <% @shop.categories.each do |cat| %>
             <div class="shop-banner-landing">
               <% if cat.products.any? %>
               <li>

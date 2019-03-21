@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <% @shop = Shop.last %>
   <header>
     <nav>
     <div class="container">
@@ -37,13 +38,13 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text"><%= current_shop.shop_name %></h5>
-          <p class="grey-text text-lighten-4"><%= current_shop.tag_line %></p>
+          <h5 class="white-text"><%= @shop.shop_name %></h5>
+          <p class="grey-text text-lighten-4"><%= @shop.tag_line %></p>
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">Contact Information</h5>
           <ul>
-            <% current_shop.addresses.each do |addr| %>
+            <% @shop.addresses.each do |addr| %>
               <li><%= addr.physical_address %></li>
               <li><%= addr.phone_number %></li>
             <% end %>
@@ -53,7 +54,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-      © 2014 Copyright <%= current_shop.shop_name %>
+      © 2014 Copyright <%= @shop.shop_name %>
       <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
       </div>
     </div>
