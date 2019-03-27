@@ -19,6 +19,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :vat_rate %><br />
+    <%= f.number_field :vat_rate %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>

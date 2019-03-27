@@ -46,26 +46,31 @@
                   <%= number_to_currency(item.product.price, :unit => ' KES') %>
                 </td>
                 <td class="td-cart"><%= item.quantity %></td>
-                <td class="td-cart"><%= number_to_currency((item.quantity * item.product.price), :unit => ' KES') %></td>
+                <td class="td-cart"><%= number_to_currency(item.total_cost, :unit => ' KES') %></td>
               </tr>
             <% end %>
           </tbody>
         </table>
-        <table>
-          <tr>
-            <td>Subtotal</td>
-            <td><%= number_to_currency(rand(25000..30000), :unit => ' KES') %></td>
-          </tr>
-          <tr>
-            <td>VAT 16%</td>
-            <td><%= number_to_currency(rand(25000..30000), :unit => ' KES') %></td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td><%= number_to_currency(rand(25000..30000), :unit => ' KES') %></td>
-          </tr>
-        </table>
-        <%= link_to 'Checkout', root_url, class: 'btn-large' %>
+        <% if @cart.sub_total_price != nil %>
+          <table>
+            <tr>
+              <td>Subtotal</td>
+              <td><%= number_to_currency(@cart.sub_total_price, :unit => ' KES') %></td>
+            </tr>
+            <tr>
+              <td>VAT
+              <%= @shop.vat_rate %>%</td>
+              <td><%= number_to_currency(@cart.sub_total_price * @shop.vat_rate.to_i / 100, :unit => ' KES') %></td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td><%= number_to_currency(@cart.total_price, :unit => ' KES') %></td>
+            </tr>
+          </table>
+        <% end %>
+        <div class="">
+          <%= link_to 'Checkout', root_url, class: 'btn-large' %>
+        </div>
     </div>
   </div>
   <body onload="slider()">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_131904) do
+ActiveRecord::Schema.define(version: 2019_03_22_165907) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "country"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_131904) do
     t.bigint "product_id"
     t.bigint "shopping_cart_id"
     t.string "size"
+    t.decimal "total_cost", precision: 10
     t.index ["product_id"], name: "index_order_items_on_product_id"
     t.index ["shopping_cart_id"], name: "index_order_items_on_shopping_cart_id"
   end
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_131904) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "vat_rate", precision: 10
     t.index ["email"], name: "index_shops_on_email", unique: true
     t.index ["reset_password_token"], name: "index_shops_on_reset_password_token", unique: true
   end
