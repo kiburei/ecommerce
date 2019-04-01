@@ -16,8 +16,20 @@
               <p><%= product.product_description[0, 30] + "..." %> <%= link_to 'more' %></p>
             </div>
             <div class="card-action">
-              <a href="#">Add to Cart</a>
-              <span class="money-tile"><%= number_to_currency(product.price, :unit => ' KES') %></span>
+              <div class="row">
+                <div class="col s6">
+                  <%= form_tag order_items_path do %>
+                    <%= hidden_field_tag :product_id, nil, :value => product.id %>
+                    <%= hidden_field_tag :quantity, nil, :value => 1 %>
+                    <%= submit_tag 'Add to Cart', class: 'btn' %>
+                  <% end %>
+                </div>
+                <div class="col s6">
+                  <div class="money-tile">
+                    <%= number_to_currency(product.price, :unit => ' KES') %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
