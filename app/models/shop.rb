@@ -6,4 +6,5 @@ class Shop < ApplicationRecord
   has_many :addresses
   has_many :categories
   has_many :products
+  has_many :orders
 end

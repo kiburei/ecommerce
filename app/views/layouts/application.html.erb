@@ -29,7 +29,7 @@
     </div>
   </nav>
   </header>
-  <div class="shopping-cart">
+  <div class="modal shopping-cart">
     <div class="cart-title">
       <h6>Cart <sub><%= @cart.order_items.count %> Items</sub> </h6>
         <table>
@@ -68,8 +68,17 @@
             </tr>
           </table>
         <% end %>
-        <div class="">
-          <%= link_to 'Checkout', root_url, class: 'btn-large' %>
+        <div class="customer-form">
+          <h6>Customer Details</h6>
+          <%= form_tag orders_path do %>
+            <%= text_field_tag :client_name, nil, :placeholder => 'Enter Your Name' %>
+            <%= text_field_tag :client_phone_number, nil, :placeholder => 'Enter Mpesa Phone Number' %>
+            <%= text_field_tag :delivery, nil, :placeholder => 'Enter Delivery Address' %>
+            <%= select_tag :order_payment_method, options_for_select(['Mpesa', 'Card', 'Cash on Delivery']), class: 'browser-default' %>
+            <div class="">
+              <%= submit_tag 'checkout', class: 'btn' %>
+            </div>
+          <% end %>
         </div>
     </div>
   </div>
@@ -79,6 +88,7 @@
     </div>
   </body>
   <footer class="page-footer">
+    <% if !@shop.nil? %>
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -102,6 +112,7 @@
       <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
       </div>
     </div>
+    <% end %>
   </footer>
 <script type="text/javascript">
   $(document).ready(function(){

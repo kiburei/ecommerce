@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  order_sub_total: 9.99
+  order_subtotal: 9.99
   order_total: 9.99
   order_items_count: 1
   order_status: MyString
   order_payment_method: MyString
 
 two:
-  order_sub_total: 9.99
+  order_subtotal: 9.99
   order_total: 9.99
   order_items_count: 1
   order_status: MyString

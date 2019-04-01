@@ -116,7 +116,10 @@ body {
 
 .shopping-cart {
   float: right;
-  margin-right: 10px;
+  margin-right: 0px;
+  width: 275px;
+  max-height: 100%;
+  display: block;
 }
 
 .cart-title {
@@ -127,6 +130,10 @@ body {
   font-size: 10px;
 }
 
-.add-to-cart {
+.checkout {
+  padding: 10px;
+}
 
+.customer-form {
+  padding: 10px;
 }

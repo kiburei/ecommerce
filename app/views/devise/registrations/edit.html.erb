@@ -1,3 +1,30 @@
+<div class="orders">
+  <div class="card">
+    <h5>Orders</h5>
+    <table class="stripped">
+      <thead>
+        <th>Order Number</th>
+        <th>Customer</th>
+        <th>Cart Items</th>
+        <th>Order Value</th>
+        <th>Payment Method</th>
+        <th>Status</th>
+      </thead>
+      <tbody>
+        <% current_shop.orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.client_name %></td>
+            <td><%= order.order_items_count %></td>
+            <td><%= number_to_currency(order.order_total, :unit => 'KES ') %></td>
+            <td><%= order.order_payment_method %></td>
+            <td><%= order.order_status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div class="row">
   <div class="col s8">
     <div class="card shop-info">
@@ -75,6 +102,7 @@
     </div>
   </div>
 </div>
+
 <div class="row">
   <div class="col s4">
     <div class="card">
