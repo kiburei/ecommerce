@@ -4,7 +4,9 @@ class OrdersController < ApplicationController
   def create
     @order = Shop.last.orders.create(order_subtotal: @cart.sub_total_price, order_total: @cart.total_price, order_items_count: @cart.order_items.count, order_status: 'In Progress')
     @order.update(order_params)
-    # Empty Cart/Create new
+    @cart.order_items.each do |order_item|
+      @order.order_items.create!(quantity: order_item.attributes["quantity"], product_id: order_item.attributes["product_id"], size: order_item["size"], total_cost: order_item.attributes["total_cost"])
+    end
     reset_cart
     redirect_to root_url
   end

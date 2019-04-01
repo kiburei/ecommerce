@@ -9,16 +9,26 @@
         <th>Order Value</th>
         <th>Payment Method</th>
         <th>Status</th>
+        <th>Date</th>
+        <th></th>
       </thead>
       <tbody>
         <% current_shop.orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
             <td><%= order.client_name %></td>
-            <td><%= order.order_items_count %></td>
+            <td>
+               <ul>
+                 <% order.order_items.each do |item| %>
+                   <li><%= item.product.product_name %>(<%= item.quantity %>)</li>
+                 <% end %>
+               </ul>
+            </td>
             <td><%= number_to_currency(order.order_total, :unit => 'KES ') %></td>
             <td><%= order.order_payment_method %></td>
             <td><%= order.order_status %></td>
+            <td><%= order.created_at.to_date %></td>
+            <td><%= link_to 'Dispatch', root_url, class: 'btn' %></td>
           </tr>
         <% end %>
       </tbody>
