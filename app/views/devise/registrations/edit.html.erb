@@ -123,7 +123,8 @@
       <button class="btn btn-add" onclick="newCategory()">+</button>
       <h5>Shop Categories</h5>
       <div id="category-form" style="display: none;">
-        <%= form_tag categories_path do %>
+        <%= form_tag categories_path, multipart: true do %>
+          <%= file_field_tag :image %>
           <%= text_field_tag :category_name, nil, :placeholder => 'Category Name' %>
           <%= submit_tag 'Add', class: 'btn' %>
         <% end %>
@@ -145,11 +146,11 @@
     <div class="card">
       <button class="btn btn-add" onclick="newProduct()">+</button>
       <div id="product-form" style="display: none;">
-        <%= form_tag products_path do %>
+        <%= form_tag products_path, multipart: true do %>
+          <%= file_field_tag :image, required: true %>
           <%= select_tag "category_id", options_from_collection_for_select(current_shop.categories, 'id', 'category_name', '1'), class: 'browser-default' %>
-          <!-- <%= file_field_tag :avatar, as: :file %> -->
-          <%= text_field_tag :product_name, nil, :placeholder => 'Product Name' %>
-          <%= text_field_tag :product_description, nil, :placeholder => 'Product Description' %>
+          <%= text_field_tag :product_name, nil, :placeholder => 'Product Name', required: true %>
+          <%= text_field_tag :product_description, nil, :placeholder => 'Product Description', required: true %>
           <div class="row">
             <div class="col s6">
               <%= number_field_tag :price, nil, :placeholder => 'Product Price' %>

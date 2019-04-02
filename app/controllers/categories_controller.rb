@@ -6,7 +6,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = current_shop.categories.new(category_params)
+    @category = current_shop.categories.build(category_params)
+    @category.image.attach(params[:image])
 
     respond_to do |format|
       if @category.save

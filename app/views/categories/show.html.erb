@@ -9,7 +9,7 @@
         <div class="col s3 ">
           <div class="card" style="padding: 0px;">
             <div class="card-image">
-              <%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card' %>
+              <li><%= image_tag product.image, class: 'product-card-big' %></li>
             </div>
             <div class="card-content">
               <h6><%= product.product_name %></h6>

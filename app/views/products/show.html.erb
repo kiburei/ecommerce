@@ -2,10 +2,7 @@
   <div class="row product-area">
     <div class="col s6">
       <ul class="bxslider" style="border: 0px;">
-        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
-        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
-        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
-        <li><%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card-big' %></li>
+        <li><%= image_tag @product.image, class: 'product-card-big' %></li>
       </ul>
     </div>
     <div class="col s6">
@@ -45,7 +42,7 @@
               <div class="col s6">
                 <div class="card" style="padding: 0px;">
                   <div class="card-image">
-                    <%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card' %>
+                    <li><%= image_tag product.image, class: 'product-card-big' %></li>
                   </div>
                   <div class="card-content">
                     <h6><%= product.product_name %></h6>
@@ -77,7 +74,7 @@
             <div class="col s6 ">
               <div class="card" style="padding: 0px;">
                 <div class="card-image">
-                  <%= image_tag ['store', 'band', 'diamond', 'watch', 'crush'].sample, class: 'product-card' %>
+                  <li><%= image_tag product.image, class: 'product-card-big' %></li>
                 </div>
                 <div class="card-content">
                   <h6><%= product.product_name %></h6>
