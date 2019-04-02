@@ -13,23 +13,26 @@
       <p><%= @product.product_description %></p>
       <p><%= number_to_currency(@product.price, :unit => ' KES') %></p>
       <div class="qty-form">
-        <%= form_tag order_items_path  do %>
           <label for="">Size</label>
-          <%= hidden_field_tag :product_id, nil, :value => @product.id %>
-          <%= select_tag :size, options_for_select(['XXL', 'XL', 'Large', 'Medium', 'Small']), class: 'browser-default' %>
+          <select id="product_size" class="browser-default">
+            <option value="XXL">XXL</option>
+            <option value="XL">XL</option>
+            <option value="L">L</option>
+            <option value="M">M</option>
+            <option value="S">S</option>
+          </select>
           <label for="">Color</label>
           <div class="row">
             <% red = ['red', 'blue', 'purple', 'orange'] %>
             <% 4.times do |x| %>
               <div class="col s2">
-                <div class="card color <%= red[x] %>"></div>
+                <div id="product_color" class="card color <%= red[x] %>"></div>
               </div>
             <% end %>
           </div>
           <label for="">Quantity</label>
-          <%= number_field_tag :quantity, nil, :value => 1 %>
-          <%= submit_tag 'Add To Cart', class: 'btn-large' %>
-        <% end %>
+          <input id="product_qty" type="text" name="qty" value="1">
+          <i class="material-icons large" onclick="addToCart(<%= @product.id %>)">add_shopping_cart</i>
       </div>
     </div>
   </div>
@@ -51,11 +54,7 @@
                   <div class="card-action">
                     <div class="row">
                       <div class="col s6">
-                        <%= form_tag order_items_path do %>
-                          <%= hidden_field_tag :product_id, nil, :value => product.id %>
-                          <%= hidden_field_tag :quantity, nil, :value => 1 %>
-                          <%= submit_tag 'Add to Cart', class: 'btn' %>
-                        <% end %>
+                        <i class="material-icons" onclick="addToCart(<%= product.id %>)">add_shopping_cart</i>
                       </div>
                       <div class="col s6">
                         <div class="money-tile">
@@ -87,11 +86,7 @@
                 <div class="card-action">
                   <div class="row">
                     <div class="col s6">
-                      <%= form_tag order_items_path do %>
-                        <%= hidden_field_tag :product_id, nil, :value => product.id %>
-                        <%= hidden_field_tag :quantity, nil, :value => 1 %>
-                        <%= submit_tag 'Add to Cart', class: 'btn' %>
-                      <% end %>
+                      <i class="material-icons" onclick="addToCart(<%= product.id %>)">add_shopping_cart</i>
                     </div>
                     <div class="col s6">
                       <div class="money-tile">

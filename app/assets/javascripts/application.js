@@ -27,3 +27,55 @@ function newCategory() {
 function newProduct() {
   document.getElementById('product-form').style.display = 'block';
 }
+
+function addToCart(id) {
+    var data = {
+    product_id: id,
+    quantity: document.getElementById('product_qty') ? document.getElementById('product_qty').value : 1,
+    color: document.getElementById('product_color') ? document.getElementById('product_color').value : "Nill",
+    size: document.getElementById('product_size') ? document.getElementById('product_size').value : "Nill",
+  }
+  $.ajax({
+    url: '/add_to_cart',
+    data: data,
+    type: 'GET',
+    success: function() {
+      location.reload();
+      // $('#cart').load(window.location.href + '#cart');
+    }
+  });
+  M.toast({html: 'Succefully added to Cart'});
+}
+
+function removeFromCart(id) {
+  $.ajax({
+    url: '/removeItem/' + id,
+    type: 'GET',
+    success: function() {
+      location.reload();
+    }
+  });
+  M.toast({html: 'Item removed from Cart'});
+}
+
+function plusCartItem(id) {
+  $.ajax({
+    url: '/addItem/' + id,
+    type: 'GET',
+    success: function() {
+      location.reload();
+    }
+  });
+  M.toast({html: 'Quantity Added'});
+}
+
+function minusCartItem(id) {
+  $.ajax({
+    url: '/minusItem/' + id,
+    type: 'GET',
+    success: function() {
+      location.reload();
+    }
+  });
+  M.toast({html: 'Quantity Decreased'});
+}

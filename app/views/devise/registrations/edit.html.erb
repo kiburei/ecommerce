@@ -143,6 +143,7 @@
       <div id="product-form" style="display: none;">
         <%= form_tag products_path do %>
           <%= select_tag "category_id", options_from_collection_for_select(current_shop.categories, 'id', 'category_name', '1'), class: 'browser-default' %>
+          <!-- <%= file_field_tag :avatar, as: :file %> -->
           <%= text_field_tag :product_name, nil, :placeholder => 'Product Name' %>
           <%= text_field_tag :product_description, nil, :placeholder => 'Product Description' %>
           <div class="row">

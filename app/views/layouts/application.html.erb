@@ -7,6 +7,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   </head>
   <% @shop = Shop.last %>
   <header>
@@ -30,57 +32,64 @@
   </nav>
   </header>
   <% if @cart.order_items.count > 0 %>
-    <div class="modal shopping-cart">
-      <div class="cart-title">
-        <h6>Cart <sub><%= @cart.order_items.count %> Items</sub> </h6>
-          <table>
-            <thead>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Total</th>
-            </thead>
-            <tbody>
-              <% @cart.order_items.each do |item| %>
-                <tr>
-                  <td class="td-cart">
-                    <%= item.product.product_name %></br>
-                    <%= number_to_currency(item.product.price, :unit => ' KES') %>
-                  </td>
-                  <td class="td-cart"><%= item.quantity %></td>
-                  <td class="td-cart"><%= number_to_currency(item.total_cost, :unit => ' KES') %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <% if @cart.sub_total_price != nil %>
+    <div id="cart">
+      <div class="modal shopping-cart">
+        <div class="cart-title">
+          <h6>Cart <sub><%= @cart.order_items.count %> Items</sub> </h6>
             <table>
-              <tr>
-                <td>Subtotal</td>
-                <td><%= number_to_currency(@cart.sub_total_price, :unit => ' KES') %></td>
-              </tr>
-              <tr>
-                <td>VAT
-                <%= @shop.vat_rate %>%</td>
-                <td><%= number_to_currency(@cart.sub_total_price * @shop.vat_rate.to_i / 100, :unit => ' KES') %></td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td><%= number_to_currency(@cart.total_price, :unit => ' KES') %></td>
-              </tr>
+              <thead>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Total</th>
+              </thead>
+              <tbody>
+                <% @cart.order_items.each do |item| %>
+                  <tr>
+                    <td class="td-cart">
+                      <%= item.product.product_name %></br>
+                      <%= number_to_currency(item.product.price, :unit => ' KES') %>
+                    </td>
+                    <td class="td-cart">
+                      <button onclick="minusCartItem(<%= item.id %>)">-</button>
+                      <%= item.quantity %>
+                      <button onclick="plusCartItem(<%= item.id %>)">+</button>
+                    </td>
+                    <td class="td-cart"><%= number_to_currency(item.total_cost, :unit => ' KES') %></td>
+                    <td> <i class="material-icons small" onclick="removeFromCart(<%= item.id %>)">delete_forever</i> </td>
+                  </tr>
+                <% end %>
+              </tbody>
             </table>
-          <% end %>
-          <div class="customer-form">
-            <h6>Customer Details</h6>
-            <%= form_tag orders_path do %>
-              <%= text_field_tag :client_name, nil, :placeholder => 'Enter Your Name' %>
-              <%= text_field_tag :client_phone_number, nil, :placeholder => 'Enter Mpesa Phone Number' %>
-              <%= text_field_tag :delivery, nil, :placeholder => 'Enter Delivery Address' %>
-              <%= select_tag :order_payment_method, options_for_select(['Mpesa', 'Card', 'Cash on Delivery']), class: 'browser-default' %>
-              <div class="">
-                <%= submit_tag 'checkout', class: 'btn' %>
-              </div>
+            <% if @cart.sub_total_price != nil %>
+              <table>
+                <tr>
+                  <td>Subtotal</td>
+                  <td><%= number_to_currency(@cart.sub_total_price, :unit => ' KES') %></td>
+                </tr>
+                <tr>
+                  <td>VAT
+                  <%= @shop.vat_rate %>%</td>
+                  <td><%= number_to_currency(@cart.sub_total_price * @shop.vat_rate.to_i / 100, :unit => ' KES') %></td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td><%= number_to_currency(@cart.total_price, :unit => ' KES') %></td>
+                </tr>
+              </table>
             <% end %>
-          </div>
+            <div class="customer-form">
+              <h6>Customer Details</h6>
+              <%= form_tag orders_path do %>
+                <%= text_field_tag :client_name, nil, :placeholder => 'Enter Your Name', required: true %>
+                <%= text_field_tag :client_phone_number, nil, :placeholder => 'Enter Mpesa Phone Number', required: true %>
+                <%= text_field_tag :delivery, nil, :placeholder => 'Enter Delivery Address', required: true %>
+                <%= select_tag :order_payment_method, options_for_select(['Mpesa', 'Card', 'Cash on Delivery']), class: 'browser-default' %>
+                <div class="">
+                  <%= submit_tag 'checkout', class: 'btn' %>
+                </div>
+              <% end %>
+            </div>
+        </div>
       </div>
     </div>
   <% end %>

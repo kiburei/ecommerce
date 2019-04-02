@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_091738) do
+ActiveRecord::Schema.define(version: 2019_04_02_095907) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "country"
@@ -70,6 +70,10 @@ ActiveRecord::Schema.define(version: 2019_04_01_091738) do
     t.bigint "category_id"
     t.bigint "shop_id"
     t.integer "rating"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
