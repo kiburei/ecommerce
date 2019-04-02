@@ -8,6 +8,8 @@
         <th>Cart Items</th>
         <th>Order Value</th>
         <th>Payment Method</th>
+        <th>Payment Status</th>
+        <th>Drop Off</th>
         <th>Status</th>
         <th>Date</th>
         <th></th>
@@ -16,7 +18,7 @@
         <% current_shop.orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
-            <td><%= order.client_name %></td>
+            <td><%= order.client_name %>: <%= order.client_phone_number %></td>
             <td>
                <ul>
                  <% order.order_items.each do |item| %>
@@ -26,6 +28,8 @@
             </td>
             <td><%= number_to_currency(order.order_total, :unit => 'KES ') %></td>
             <td><%= order.order_payment_method %></td>
+            <td><%= order.payment_status %></td>
+            <td><%= order.delivery %></td>
             <td><%= order.order_status %></td>
             <td><%= order.created_at.to_date %></td>
             <td><%= link_to 'Dispatch', root_url, class: 'btn' %></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_095907) do
+ActiveRecord::Schema.define(version: 2019_04_02_143500) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "country"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_095907) do
     t.string "client_phone_number"
     t.string "delivery"
     t.bigint "shop_id"
+    t.string "payment_status", default: "Unpaid"
     t.index ["shop_id"], name: "index_orders_on_shop_id"
   end
 
