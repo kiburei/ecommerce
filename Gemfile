@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.6.0'
 
 gem 'devise'
 
@@ -13,7 +13,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails', '~> 5.2.2', '>= 5.2.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'mysql2'
-# Stling
+
 gem 'materialize-sass', '~> 1.0.0'
 gem 'material_icons'
 
