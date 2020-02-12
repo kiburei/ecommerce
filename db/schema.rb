@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_04_02_153741) do
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "country"
     t.string "physical_address"
     t.string "email"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["shop_id"], name: "index_addresses_on_shop_id"
   end
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "category_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["shop_id"], name: "index_categories_on_shop_id"
   end
 
-  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["shopping_cart_id"], name: "index_order_items_on_shopping_cart_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.decimal "order_subtotal", precision: 10
     t.decimal "order_total", precision: 10
     t.integer "order_items_count"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["shop_id"], name: "index_orders_on_shop_id"
   end
 
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "product_name"
     t.string "product_description"
     t.decimal "price", precision: 10
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
 
-  create_table "shopping_carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "shopping_carts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.decimal "sub_total_price", precision: 10
     t.decimal "total_price", precision: 10
     t.datetime "created_at", null: false
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_153741) do
     t.string "session_id"
   end
 
-  create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

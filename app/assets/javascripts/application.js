@@ -17,6 +17,9 @@
 //= require_tree .
 //= require materialize
 //= require bxslider
+//= require popper
+//= require bootstrap
+//= require_tree.
 
 
 
@@ -67,6 +70,7 @@ function plusCartItem(id) {
     }
   });
   M.toast({html: 'Quantity Added'});
+  
 }
 
 function minusCartItem(id) {
@@ -78,4 +82,6 @@ function minusCartItem(id) {
     }
   });
   M.toast({html: 'Quantity Decreased'});
+
+  
 }

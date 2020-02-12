@@ -47,12 +47,17 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    ast (2.4.0)
     autoprefixer-rails (9.4.10.2)
       execjs
     bcrypt (3.1.12)
     bindex (0.5.0)
     bootsnap (1.4.1)
       msgpack (~> 1.0)
+    bootstrap (4.4.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.3)
     bxslider-rails (4.2.5.1)
     byebug (11.0.0)
@@ -92,6 +97,7 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
+    jaro_winkler (1.5.4)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -126,6 +132,10 @@ GEM
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    parallel (1.19.1)
+    parser (2.7.0.2)
+      ast (~> 2.4.0)
+    popper_js (1.16.0)
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.6)
@@ -155,6 +165,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
+    rainbow (3.0.0)
     rake (12.3.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
@@ -163,6 +174,14 @@ GEM
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
+    rubocop (0.79.0)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.7.0.1)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     sass (3.7.3)
@@ -176,6 +195,14 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.2.1)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -201,6 +228,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (1.6.1)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -219,6 +247,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  bootstrap
   bxslider-rails
   byebug
   capybara (>= 2.15)
@@ -231,8 +260,10 @@ DEPENDENCIES
   material_icons
   materialize-sass (~> 1.0.0)
   mysql2
+  popper_js
   puma (~> 3.11)
   rails (~> 5.2.2, >= 5.2.2.1)
+  rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
@@ -246,4 +277,4 @@ RUBY VERSION
    ruby 2.6.0p0
 
 BUNDLED WITH
-   1.17.3
+   2.1.4

@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:shop_name, :tag_line, :description, :vat_rate])
   end
-end
+  
+end 

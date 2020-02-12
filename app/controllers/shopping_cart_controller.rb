@@ -7,9 +7,10 @@ class ShoppingCartController < ApplicationController
     # check if order item exists
     if @cart.order_items.exists?(product_id: order_item_params[:product_id])
       @order_item = @cart.order_items.find_by_product_id(order_item_params[:product_id])
-      qty = @order_item.quantity.to_i + order_item_params[:quantity].to_i
+      qty = @order_item.quantity.to_i + order_item_params[:quantity].to_i 
       total_cost = qty * @order_item.product.price
       @order_item.update(quantity: qty, total_cost: total_cost)
+   
     else
       @order_item = @cart.order_items.build(order_item_params)
       @order_item.total_cost = @order_item.product.price * @order_item.quantity
@@ -17,9 +18,7 @@ class ShoppingCartController < ApplicationController
     end
     ShoppingCart.update_cart(@cart, current_shop)
     redirect_to product_path(order_item_params[:product_id])
-
   end
-
   def remove_from_cart
     @order_item.delete
     ShoppingCart.update_cart(@cart, current_shop)
@@ -27,11 +26,13 @@ class ShoppingCartController < ApplicationController
 
   def add_item
     qty = @order_item.quantity.to_i + 1
+    if qty <= @order_item.product.quantity 
+      redirect_to root_url
     total_cost = qty * @order_item.product.price
     @order_item.update(quantity: qty, total_cost: total_cost)
     ShoppingCart.update_cart(@cart, current_shop)
   end
-
+end
   def minus_item
     qty = @order_item.quantity.to_i - 1
     if qty < 1
@@ -40,7 +41,7 @@ class ShoppingCartController < ApplicationController
       total_cost = qty * @order_item.product.price
       @order_item.update(quantity: qty, total_cost: total_cost)
       ShoppingCart.update_cart(@cart, current_shop)
-    end
+    end 
   end
 
   private

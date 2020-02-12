@@ -1,0 +1,31 @@
+<h5> Edit Product </h5>
+<%= form_with(model: @product, remote: true ) do |form| %>
+<div class="field">
+<%= form.label :product_name %><br />
+<%= form.text_field :product_name %>
+</div>
+
+<div class="field">
+<%= form.label :product_description %><br />
+<%= form.text_field :product_description %>
+</div>
+
+<div class="field">
+<%= form.label :price %><br />
+<%= form.number_field :price %>
+</div>
+
+<div class="field">
+<%= form.label :quantity %><br />
+<%= form.number_field :quantity %>
+</div>
+
+<div class="field">
+<%= form.label :image %><br />
+<%= form.file_field :image %>
+</div>
+
+   <div class="actions">
+          <%= form.submit "Update Product", class: 'btn' %>
+        </div>
+<% end %>
