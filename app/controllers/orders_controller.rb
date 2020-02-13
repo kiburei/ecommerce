@@ -79,10 +79,7 @@ class OrdersController < ApplicationController
 
   end
 
-  def cod 
-  
-
-  end
+ 
   
   def destroy
     @order = Order.find(params[:id])
