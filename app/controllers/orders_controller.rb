@@ -10,32 +10,41 @@ class OrdersController < ApplicationController
     @order.update(order_params)
     @cart.order_items.each do |order_item|
     @order.order_items.create!(quantity: order_item.attributes["quantity"], product_id: order_item.attributes["product_id"], size: order_item["size"], total_cost: order_item.attributes["total_cost"])
-    end
+  end
     reset_cart
     redirect_to payment_path
   end
-
   def reset_cart
     puts @cart.order_items
     @cart.order_items.delete_all
     ShoppingCart.update_cart(@cart, current_shop)
   end
 
+  #dispatch orders 
   def show 
     @order = Order.find(params[:id])
+    
+    if @order.order_payment_method == "Cash on Delivery"
 
-    url = URI("http://sna.co.ke/sna_api/index.php")
+        url = URI("http://sna.co.ke/sna_api/index.php")
 
-    http = Net::HTTP.new(url.host, url.port);
-    request = Net::HTTP::Post.new(url)
-    form_data = [['function', 'sendMessage'],['phoneNumber', @order.client_phone_number],['message', "Hi #{@order.client_name}. Your Order Number #{@order.id} has been dispatched to #{@order.delivery}."],['senderId', 'COVERAPP'],['username', 'MALISAFI']]
-    request.set_form form_data, 'multipart/form-data'
-    response = http.request(request)
-    puts response.read_body
+        http = Net::HTTP.new(url.host, url.port);
+        request = Net::HTTP::Post.new(url)
+        form_data = [['function', 'sendMessage'],['phoneNumber', @order.client_phone_number],['message', "Hi #{@order.client_name}. Your Order Number #{@order.id} has been dispatched to #{@order.delivery}."],['senderId', 'COVERAPP'],['username', 'MALISAFI']]
+        request.set_form form_data, 'multipart/form-data'
+        response = http.request(request)
+        puts response.read_body
 
+    elsif @order.order_payment_method == "Mpesa"
+      redirect_to root_url
+    elsif @order.order_payment_method == "Card"
+      redirect_to root_url
+    elsif @order.order_payment_method == "Airtel Money"
+       redirect_to root_url
+
+    end
 
   end
-
 
   def payment
     @pay = Order.last
@@ -45,7 +54,6 @@ class OrdersController < ApplicationController
 
         https = Net::HTTP.new(url.host, url.port);
         https.use_ssl = true
-        
         request = Net::HTTP::Post.new(url)
         form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '367776'],['Amount', @pay.order_total.to_i.to_s],['PhoneNumber', @pay.client_phone_number],['AccountReference', 'PKX2019062'],['TransactionDesc', 'PKX201906264'],['FullNames', '- - -']]
         request.set_form form_data, 'multipart/form-data'
@@ -80,7 +88,6 @@ class OrdersController < ApplicationController
   end
 
  
-  
   def destroy
     @order = Order.find(params[:id])
 

@@ -2,15 +2,13 @@ class ShoppingCartController < ApplicationController
   before_action :set_cart, only: [:add_to_cart, :remove_from_cart, :add_item, :minus_item]
   before_action :set_order_item, only: [:remove_from_cart, :add_item, :minus_item]
 
-  def add_to_cart
-
+  def add_to_cart  
     # check if order item exists
     if @cart.order_items.exists?(product_id: order_item_params[:product_id])
       @order_item = @cart.order_items.find_by_product_id(order_item_params[:product_id])
       qty = @order_item.quantity.to_i + order_item_params[:quantity].to_i 
       total_cost = qty * @order_item.product.price
       @order_item.update(quantity: qty, total_cost: total_cost)
-   
     else
       @order_item = @cart.order_items.build(order_item_params)
       @order_item.total_cost = @order_item.product.price * @order_item.quantity
@@ -19,6 +17,7 @@ class ShoppingCartController < ApplicationController
     ShoppingCart.update_cart(@cart, current_shop)
     redirect_to product_path(order_item_params[:product_id])
   end
+
   def remove_from_cart
     @order_item.delete
     ShoppingCart.update_cart(@cart, current_shop)
@@ -27,7 +26,7 @@ class ShoppingCartController < ApplicationController
   def add_item
     qty = @order_item.quantity.to_i + 1
     if qty <= @order_item.product.quantity 
-      redirect_to root_url
+      redirect_to product_path
     total_cost = qty * @order_item.product.price
     @order_item.update(quantity: qty, total_cost: total_cost)
     ShoppingCart.update_cart(@cart, current_shop)
