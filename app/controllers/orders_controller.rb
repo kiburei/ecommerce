@@ -35,6 +35,8 @@ class OrdersController < ApplicationController
         response = http.request(request)
         puts response.read_body
 
+        @order.update(:order_status => "Completed")
+
     elsif @order.order_payment_method == "Mpesa"
       redirect_to root_url
     elsif @order.order_payment_method == "Card"
@@ -43,12 +45,12 @@ class OrdersController < ApplicationController
        redirect_to root_url
 
     end
-
   end
 
   def payment
     @pay = Order.last
     if @pay.order_payment_method == "Mpesa"
+      redirect_to confirmations_path
 
         url = URI("https://payme.revenuesure.co.ke/index.php")
 
@@ -67,7 +69,7 @@ class OrdersController < ApplicationController
          redirect_to root_url  
 
     elsif @pay.order_payment_method == "Cash on Delivery"  
-      redirect_to cod_path
+      redirect_to confirmations_path
  
        url = URI("http://sna.co.ke/sna_api/index.php")
 
@@ -77,24 +79,23 @@ class OrdersController < ApplicationController
        request.set_form form_data, 'multipart/form-data'
        response = http.request(request)
        puts response.read_body
+       
+      #  @pay.update(:payment_status => "Paid")
 
-       @pay.update(:order_status => "Completed")
-
-       @pay.update(:payment_status => "Paid")
-
+      #  quantity = @order_item.product.quantity - 1
        
     end
 
   end
 
- 
+    
   def destroy
-    @order = Order.find(params[:id])
 
     @order.destroy
       respond_to do |format|
         format.html { redirect_to edit_shop_registration_path, notice: 'Order was successfully cleared!.' }
         format.json { head :no_content }
+        format.js
       end
   end
 
