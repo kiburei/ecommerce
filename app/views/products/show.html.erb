@@ -18,6 +18,10 @@
             <option value="M">M</option>
             <option value="S">S</option>
           </select>
+           <br>
+           <hr>
+          <p>Availability:</p>
+           <h6 id="inStock"><i>In Stock</i></h6>
           <label for="">Color</label>
           <div class="row">
             <% red = ['red', 'blue', 'purple', 'orange'] %>
@@ -27,7 +31,7 @@
               </div>
             <% end %>
           </div>
-          <label for="">Quantity</label>
+          <label for="">Add Quantity</label>
           <input id="product_qty" type="text" name="qty" value="1">
           <i class="material-icons large" onclick="addToCart(<%= @product.id %>)">add_shopping_cart</i>
       </div>
@@ -100,3 +104,12 @@
     </div>
   </div>
 </div>
+<script>
+var available = "<%= @product.quantity %>"
+if (available == 0){
+  $('#inStock').html('Out of Stock')
+}
+ 
+
+// console.log(goat)
+</script>
