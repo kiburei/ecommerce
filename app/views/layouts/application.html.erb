@@ -85,13 +85,13 @@
             <% end %>
             <div class="customer-form">
               <h6>Customer Details</h6>
-              <%= form_tag orders_path do %>
+              <%= form_tag orders_path, remote: true do %>
                 <%= text_field_tag :client_name, nil, :placeholder => 'Enter Your Name', required: true %>
-                <%= text_field_tag :client_phone_number, nil, :placeholder => 'Enter Mpesa Phone Number', required: true %>
+                <%= number_field_tag :client_phone_number, nil, :placeholder => 'Enter Phone Number', required: true %>
                 <%= text_field_tag :delivery, nil, :placeholder => 'Enter Delivery Address', required: true %>
                 <%= select_tag :order_payment_method, options_for_select(['Mpesa', 'Card', 'Airtel Money' , 'Cash on Delivery']), class: 'browser-default' %>
                 <div class="">
-                  <%= submit_tag 'checkout', class: 'btn' %>
+                  <%= submit_tag 'checkout', class: 'btn'%>
                 </div>
               <% end %>
             </div>
@@ -136,5 +136,15 @@
   $(document).ready(function(){
     $('.bxslider').bxSlider();
   });
+
+// var check_quantity = "<%# @product.quantity %>"
+// var order_quantity = "<%# @order_item.attributes["quantity"]%>"
+// if (check_quantity = check_quantity -  ){
+//   $('#inStock').html('Out of Stock')
+// }
+
+// var qtys = "<%#@order_item.quantity%>"
+// console.log(qtys)
+
 </script>
 </html>
