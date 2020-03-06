@@ -82,6 +82,31 @@ function minusCartItem(id) {
     }
   });
   M.toast({html: 'Quantity Decreased'});
-
   
 }
+
+function addToWishlist(id) {
+  $("#changeColor").addClass("material-icons md-24");
+  $("#changeColor").text("favorite");
+  $.ajax({
+    url: '/wishlist/' + id,
+    type: 'GET',
+    success: function() {
+      location.reload();
+    }
+  });
+  M.toast({html: 'Added to Wishlist'});
+}
+
+function removeFromWishlist(id) {
+  $.ajax({
+    url: '/remove_from_list/' + id,
+    type: 'GET',
+    success: function() {
+      location.reload();
+    }
+  });
+  M.toast({html: 'Removed from Wishlist'});
+}
+
+
