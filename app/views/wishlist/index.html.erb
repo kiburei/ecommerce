@@ -1,0 +1,33 @@
+<div class="wishlist">
+  <div class="card">
+    <h5>Wishlist</h5>  
+  
+
+<table>
+  <thead>
+    <tr>
+      <th>Product Image</th>
+      <th>Product Name</th>
+      <th>Product Description</th>
+      <th>Product Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= image_tag product.image, :height => "100px", :width => "80px" %></td>
+        <td><%= product.product_name %></td>
+        <td><%= product.product_description %></td>
+        <td><%= number_to_currency(product.price, :unit => ' KES') %></td>
+        <td> <i class="material-icons md-24 small" onclick="removeFromWishlist(<%= product.id %>)">delete</i> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+</div>
+</div>
