@@ -26,7 +26,7 @@ class ShoppingCartController < ApplicationController
   def add_item
     qty = @order_item.quantity.to_i + 1
     if qty <= @order_item.product.quantity 
-      redirect_to product_path
+      redirect_to root_url
     total_cost = qty * @order_item.product.price
     @order_item.update(quantity: qty, total_cost: total_cost)
     ShoppingCart.update_cart(@cart, current_shop)
