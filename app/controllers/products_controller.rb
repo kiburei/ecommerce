@@ -52,6 +52,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def wishlist
+    @products = Product.all
+  end
+
   private
 
   
