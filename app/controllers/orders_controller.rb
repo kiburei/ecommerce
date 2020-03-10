@@ -57,13 +57,23 @@ class OrdersController < ApplicationController
         https = Net::HTTP.new(url.host, url.port);
         https.use_ssl = true
         request = Net::HTTP::Post.new(url)
-        form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '367776'],['Amount', @pay.order_total.to_i.to_s],['PhoneNumber', @pay.client_phone_number],['AccountReference', 'PKX2019062'],['TransactionDesc', 'PKX201906264'],['FullNames', '- - -']]
+        form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '175555'],['Amount', @pay.order_total.to_i.to_s],['PhoneNumber', @pay.client_phone_number],['AccountReference', 'PKX2019062'],['TransactionDesc', 'PKX201906264'],['FullNames', '- - -']]
         request.set_form form_data, 'multipart/form-data'
         response = https.request(request)
         puts response.read_body
           
     elsif @pay.order_payment_method == "Card"
-        redirect_to root_url
+        url = URI("http://payme.revenuesure.co.ke/api/index.php?cvv=102&cardno=4180875121468408&ccexpmonth=02&ccexpyear=24&amount=#{@pay.order_total.to_i.to_s}&email=njugunajoan35@gmail.com&names=JOAN NYAMBURA NJUGUNA&orderref=TU-76654&function=CardPayment&apikey=9222ccd52aa40c016cf3fd93f7170a2f6cab7f369c8334d7c6ecb8ec5b305e24")
+
+        http = Net::HTTP.new(url.host, url.port);
+        request = Net::HTTP::Get.new(url)
+        form_data = [['TransactionType', 'CardPayment'],['PayBillNumber', '674839'],['Amount', '2'],['PhoneNumber', '0719401837'],['AccountReference', 'TEST1'],['TransactionDesc', 'DESC1']]
+        request.set_form form_data, 'multipart/form-data'
+        response = http.request(request)
+        puts response.read_body
+
+ redirect_to card_path
+
 
     elsif @pay.order_payment_method == "Airtel Money"  
          redirect_to root_url  
@@ -86,6 +96,10 @@ class OrdersController < ApplicationController
        
     end
 
+  end
+
+  def card
+    @pay = Order.last
   end
 
     
